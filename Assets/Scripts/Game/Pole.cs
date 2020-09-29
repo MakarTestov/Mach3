@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +9,48 @@ namespace Assets.Scripts.Game
     /// <summary>
     /// Для заполнения поля
     /// </summary>
-    static class Pole
+    class Pole : MonoBehaviour
     {
-        #region My Methods
+        /// <summary>
+        /// Разнообразные блоки для генерации
+        /// </summary>
+        public GameObject[] blocks;
+        /// <summary>
+        /// Игровое поле блоков
+        /// </summary>
+        public int[,] boardblock;
+
+        /// <summary>
+        /// Размер поля
+        /// </summary>
+        [SerializeField]
+        private Vector2Int CountWH;
+
+        private float Size;
+
+        private void Start()
+        {
+            boardblock = new int[CountWH.x, CountWH.y];
+            Size = blocks[0].GetComponent<RectTransform>().rect.width;
+            GenerateBoard();
+        }
+
+        public void GenerateBoard()
+        {
+            float bord = Size / 2;
+            for(int i = 0; i < boardblock.GetLength(0); i++)
+            {
+                for(int j = 0; j < boardblock.GetLength(1); j++)
+                {
+                    int r = Random.Range(0, blocks.Length);
+                    GameObject ob = Instantiate(blocks[r], new Vector3(i * Size + bord, j * Size + bord, 0), Quaternion.identity, transform);
+                    ob.name = "Block [" + i + "," + j + "]: " + r;
+                    boardblock[i, j] = r;
+                }
+            }
+        }
+
+        /*#region My Methods
         #region GameObject[,] FillPole(GameObject prefabs, Transform parent, Vector2 CountWH)
         /// <summary>
         /// Заполнить поле игровыми объектами
@@ -42,6 +80,6 @@ namespace Assets.Scripts.Game
             return Balls;
         }
         #endregion
-        #endregion
+        #endregion*/
     }
 }
