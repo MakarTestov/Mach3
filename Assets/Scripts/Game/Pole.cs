@@ -18,7 +18,7 @@ namespace Assets.Scripts.Game
         /// <summary>
         /// Игровое поле блоков
         /// </summary>
-        public int[,] boardblock;
+        public GameObject[,] boardblock;
 
         /// <summary>
         /// Размер поля
@@ -30,22 +30,46 @@ namespace Assets.Scripts.Game
 
         private void Start()
         {
-            boardblock = new int[CountWH.x, CountWH.y];
+            boardblock = new GameObject[CountWH.x, CountWH.y];
             Size = blocks[0].GetComponent<RectTransform>().rect.width;
             GenerateBoard();
+            SetNeighbour();
+        }
+
+        private void SetNeighbour()
+        {
+            for (int i = 0; i < boardblock.GetLength(0); i++)
+            {
+                for (int j = 0; j < boardblock.GetLength(1); j++)
+                {
+                    if(i > 0)
+                        boardblock[i, j].GetComponent<Ball>().linkNeighbouгs.Add(boardblock[i-1, j].GetComponent<Ball>());
+                    if(i< boardblock.GetLength(0) - 1)
+                        boardblock[i, j].GetComponent<Ball>().linkNeighbouгs.Add(boardblock[i+1, j].GetComponent<Ball>());
+                    if(j > 0)
+                        boardblock[i, j].GetComponent<Ball>().linkNeighbouгs.Add(boardblock[i, j-1].GetComponent<Ball>());
+                    if(j < boardblock.GetLength(1) - 1)
+                        boardblock[i, j].GetComponent<Ball>().linkNeighbouгs.Add(boardblock[i, j+1].GetComponent<Ball>());
+                }
+            }
         }
 
         public void GenerateBoard()
         {
-            float bord = Size / 2;
+            float board = Size / 2;
             for(int i = 0; i < boardblock.GetLength(0); i++)
             {
                 for(int j = 0; j < boardblock.GetLength(1); j++)
                 {
                     int r = Random.Range(0, blocks.Length);
-                    GameObject ob = Instantiate(blocks[r], new Vector3(i * Size + bord, j * Size + bord, 0), Quaternion.identity, transform);
+                    GameObject ob = Instantiate(blocks[r], new Vector3(i * Size + board, j * Size + board, 0), Quaternion.identity, transform);
                     ob.name = "Block [" + i + "," + j + "]: " + r;
-                    boardblock[i, j] = r;
+
+                    Ball b = ob.GetComponent<Ball>();
+                    b.i = i;
+                    b.j = j;
+                    b.ID = r;
+                    boardblock[i, j] = ob;
                 }
             }
         }
