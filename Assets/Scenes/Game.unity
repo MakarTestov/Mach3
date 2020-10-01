@@ -1007,6 +1007,42 @@ PrefabInstance:
       propertyPath: m_Name
       value: FonMenu_Image
       objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_Maskable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_RaycastTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6975941d1115dbe4e9f89864d62ada3d,
+        type: 3}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_UseSpriteMesh
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448977369774491128, guid: 9683f12251fa4e94b9fd24db5e0510c8,
+        type: 3}
+      propertyPath: m_PreserveAspect
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3448977369774491129, guid: 9683f12251fa4e94b9fd24db5e0510c8,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1786,9 +1822,9 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 515663223}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -2254,7 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16db865e8ab095646b37c1b0670a96c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LimitTimeMilliSec: 2
+  LimitTimeMilliSec: 50.62
   isTick: 0
 --- !u!1 &1880749617571111384
 GameObject:
@@ -2761,18 +2797,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocks:
-  - {fileID: 2011744753875627279, guid: 9b819a314cc0b3b4fbf26444fcfa87e1, type: 3}
-  - {fileID: 3394834945188162292, guid: ab5cf1181f330c546a543e0ee28af27f, type: 3}
-  - {fileID: 2903187141923074729, guid: 357e72546a119424db529c576e70e668, type: 3}
-  - {fileID: 8837659171510460806, guid: 554c1349d7a26134eb709cf43c8868c4, type: 3}
-  - {fileID: 3615254250541220855, guid: db496b5ce5af6fe4397e5225a6d63bec, type: 3}
-  - {fileID: 4406902854339076186, guid: b88e69b79005b2c4bb176c438c40b61b, type: 3}
-  - {fileID: 1615706539941778935, guid: 6ddf3137b1314754e8adfdc8ceb43e0a, type: 3}
-  - {fileID: 7232682621491050580, guid: cb585e7c5c6e46f468e69ab1526ac074, type: 3}
+  - {fileID: 744597837488441836, guid: 68253c188c08b544a8b967a22618dbf0, type: 3}
+  - {fileID: 6935848026677454178, guid: 12e86df3bad268648a61110bd24ded4b, type: 3}
+  - {fileID: 4128761455529407916, guid: ea103058b9886fa4b9dd31fa8ad591ef, type: 3}
+  - {fileID: 830898284911106218, guid: a2279237a397fb048acb5307680a2647, type: 3}
+  - {fileID: 278380344917610481, guid: bc2028d6c527d2b4db8adbe10ed15f71, type: 3}
+  - {fileID: 6444804686359896264, guid: 7d3d26062673c614cb630e0866cb6dcc, type: 3}
+  - {fileID: 8239257077145279553, guid: d246dff0758926647830e2946096a7d6, type: 3}
+  - {fileID: 4429221438216782387, guid: 7adbae1a69e2e0b47a882a4fc3badd15, type: 3}
   Pointer: {fileID: 1898197251}
   timer: {fileID: 1932947857}
   CountWH: {x: 10, y: 10}
-  CountSteps: 2
+  CountSteps: 10
   CountStepsText: {fileID: 1739582210}
   score: 0
   ScoreText: {fileID: 1470191470}

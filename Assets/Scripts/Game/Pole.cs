@@ -1,4 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -191,7 +194,7 @@ namespace Assets.Scripts.Game
                     b.i = i;
                     b.j = j;
                     b.ID = r;
-                    b.EndClick += DeleteBall;
+                    b.EndClick += BallDelete;
                     boardblock[i, j] = ob;
                 }
             }
@@ -262,23 +265,27 @@ namespace Assets.Scripts.Game
         }
         #endregion
 
+        private void BallDelete(Ball ball)
+        {
+            StartCoroutine(DeleteBall(ball));
+        }
+
         #region DeleteBall(Ball ball, List<Ball> nb)
         /// <summary>
         /// Событие при завершении клика
         /// </summary>
         /// <param name="ball"></param>
         /// <param name="nb"></param>
-        private void DeleteBall(Ball ball)
+        private IEnumerator DeleteBall(Ball ball)
         {
             timer.StopTimer();
-            if (Pointer.activeSelf)
-            { 
-                Pointer.SetActive(false);
-                timer.StartTimer();
-            }
-
             if (CanClick)
             {
+                if (Pointer.activeSelf)
+                {
+                    Pointer.SetActive(false);
+                    timer.StartTimer();
+                }
                 CanClick = false;
 
                 #region Sourch Balls by ID
@@ -298,6 +305,7 @@ namespace Assets.Scripts.Game
                     #region Shifting blocks
                     foreach (var r in nball)
                     {
+                        yield return StartCoroutine(r.GetComponent<ResizeBall>().Resize(false));
                         DownCollum(r.i, r.j, r);
                         ChangeBlock(r);
                     }
@@ -308,8 +316,15 @@ namespace Assets.Scripts.Game
                 timer.ClearTimer();
                 timer.StartTimer();
             }
+            yield return null;
         }
         #endregion
+
+        IEnumerator BallResize(bool up)
+        {
+
+            yield return null;
+        }
 
         #region CheckBallColor(int i, int j, List<Ball> nb)
         /// <summary>
@@ -387,6 +402,7 @@ namespace Assets.Scripts.Game
                 boardblock[i + 1, jCollum] = g;
                 #endregion
             }
+            StartCoroutine(ball.GetComponent<ResizeBall>().Resize(true));
 
         }
         #endregion
