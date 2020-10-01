@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Assets.Scripts.Tags
+﻿namespace Assets.Scripts.Tags
 {
     /// <summary>
     /// Класс для получения всех внешних ссылок

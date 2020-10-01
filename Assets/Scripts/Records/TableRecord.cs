@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace Assets.Scripts.Records
 {
@@ -18,7 +17,7 @@ namespace Assets.Scripts.Records
         /// <summary>
         /// Путь к файлу сохранения рекордов
         /// </summary>
-        private string Path = @"E:\Record.csv";
+        private string Path = Application.persistentDataPath + "/Record.csv";
         #endregion
 
         #region Records

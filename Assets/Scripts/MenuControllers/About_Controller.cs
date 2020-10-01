@@ -1,7 +1,5 @@
 ﻿using Assets.Scripts.Loading;
 using Assets.Scripts.Tags;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>

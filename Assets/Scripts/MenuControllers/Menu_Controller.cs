@@ -1,10 +1,7 @@
 ﻿using Assets.Scripts.Effects;
 using Assets.Scripts.Loading;
 using Assets.Scripts.Tags;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Для управлением взаимодействием кнопками меню
