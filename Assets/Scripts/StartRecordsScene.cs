@@ -53,7 +53,8 @@ namespace Assets.Scripts
                 }
                 else
                 {
-                    text += "new " + records[i].ToString() + " new\n";
+                    string n = "<color=red>new</color>";
+                    text += n + records[i].ToString() + n + "\n";
                 }
                 text += "-------------\n";
             }

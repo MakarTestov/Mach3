@@ -40,7 +40,7 @@ namespace Assets.Scripts.Game
         #endregion
 
         #region My Methods
-        private void Finish(Pole pole)
+        private void Finish(Pole pole, TypeEnd typeEnd)
         {
             TableRecord tablerecord = Singleton<TableRecord>.GetSingleton().TObject;
             if(!tablerecord.IsTableLoad)

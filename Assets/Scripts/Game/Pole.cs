@@ -1,37 +1,69 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Assets.Scripts.Game
 {
+    public enum TypeEnd { TimeOver, StepOver };
     /// <summary>
     /// Для заполнения поля
     /// </summary>
     class Pole : MonoBehaviour
     {
         #region Parameters
+        #region blocks
         /// <summary>
         /// Разнообразные блоки для генерации. Индекс блока - ID
         /// </summary>
         public GameObject[] blocks;
+        #endregion
+
+        #region boardblock
         /// <summary>
         /// Игровое поле блоков
         /// </summary>
         public GameObject[,] boardblock;
+        #endregion
 
+        #region Pointer
+        /// <summary>
+        /// Ссылка на объект указателя
+        /// </summary>
+        [SerializeField]
+        private GameObject Pointer;
+        #endregion
+
+        #region timer
+        /// <summary>
+        /// Ссылка на таймер
+        /// </summary>
+        [SerializeField]
+        private Timer timer;
+        #endregion
+
+        #region CountWH
         /// <summary>
         /// Размер поля
         /// </summary>
         [SerializeField]
         private Vector2Int CountWH;
+        #endregion
 
+        #region CountSteps
+        /// <summary>
+        /// Количество ходов игры
+        /// </summary>
         [SerializeField]
         private int CountSteps = 10;
+        #endregion
+
+        #region CountStepsText
+        /// <summary>
+        /// Ссылка на текс количества ходов
+        /// </summary>
         [SerializeField]
         private Text CountStepsText;
+        #endregion
 
         #region Score
         /// <summary>
@@ -56,23 +88,48 @@ namespace Assets.Scripts.Game
         private Text ScoreText;
         #endregion
 
+        #region Size
         /// <summary>
         /// Размер одного блока
         /// </summary>
         private float Size;
+        #endregion
 
+        #region CanClick
         /// <summary>
         /// Можно ли сейчас кликать
         /// </summary>
         private bool CanClick = true;
+        #endregion
 
-        private bool end = false;
+        #region isend
+        /// <summary>
+        /// Сейчас конец игры?
+        /// </summary>
+        private bool isend = false;
+        #endregion
 
-        public delegate void EventPole(Pole pole);
+        #region EndType
+        /// <summary>
+        /// Тип окончания игры
+        /// </summary>
+        private TypeEnd endType;
+        /// <summary>
+        /// Тип окончания игры
+        /// </summary>
+        public TypeEnd EndType
+        {
+            get { return endType; }
+        }
+        #endregion
+
+        #region EndGame
+        public delegate void EventPole(Pole pole, TypeEnd typeEnd);
         /// <summary>
         /// Вызывается при завершении игры
         /// </summary>
         public event EventPole EndGame;
+        #endregion
         #endregion
 
         #region Unity Methods
@@ -82,6 +139,14 @@ namespace Assets.Scripts.Game
             boardblock = new GameObject[CountWH.y, CountWH.x];
             Size = blocks[0].GetComponent<RectTransform>().rect.width;
             GenerateBoard();
+
+            timer.TimerOver += EndTime;
+        }
+
+        private void EndTime(Timer timer)
+        {
+            endType = TypeEnd.TimeOver;
+            End_Game();
         }
         #endregion
 
@@ -102,8 +167,8 @@ namespace Assets.Scripts.Game
         /// </summary>
         private void End_Game()
         {
-            end = true;
-            EndGame?.Invoke(this);
+            isend = true;
+            EndGame?.Invoke(this, endType);
         }
         #endregion
 
@@ -130,6 +195,7 @@ namespace Assets.Scripts.Game
                     boardblock[i, j] = ob;
                 }
             }
+            Pointer.transform.position = boardblock[Random.Range(0, boardblock.GetLength(0)), Random.Range(0, boardblock.GetLength(1))].transform.position;
         }
         #endregion
 
@@ -177,6 +243,7 @@ namespace Assets.Scripts.Game
             SetStepCountText();
             if (CountSteps <= 0)
             {
+                endType = TypeEnd.StepOver;
                 End_Game();
             }
         }
@@ -203,6 +270,13 @@ namespace Assets.Scripts.Game
         /// <param name="nb"></param>
         private void DeleteBall(Ball ball)
         {
+            timer.StopTimer();
+            if (Pointer.activeSelf)
+            { 
+                Pointer.SetActive(false);
+                timer.StartTimer();
+            }
+
             if (CanClick)
             {
                 CanClick = false;
@@ -219,7 +293,7 @@ namespace Assets.Scripts.Game
                 ChangeScore(nball.Count);
                 #endregion
 
-                if (!end)
+                if (!isend)
                 {
                     #region Shifting blocks
                     foreach (var r in nball)
@@ -230,6 +304,9 @@ namespace Assets.Scripts.Game
                     #endregion
                 }
                 CanClick = true;
+
+                timer.ClearTimer();
+                timer.StartTimer();
             }
         }
         #endregion

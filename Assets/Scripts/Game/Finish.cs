@@ -57,11 +57,20 @@ namespace Assets.Scripts.Game
         [SerializeField]
         private bool isGoodEnd = true;
         #endregion
+
+        #region TypeEndText
+        /// <summary>
+        /// Ссылка на текст типа окончания
+        /// </summary>
+        [SerializeField]
+        private Text TypeEndText;
+        #endregion
         #endregion
 
         #region Unity Methods
         private void Start()
         {
+            TypeEndText.text = GamePole.EndType.ToString();
             TableRecord tableRecord = Singleton<TableRecord>.GetSingleton().TObject;
             isGoodEnd = tableRecord.CheckRecordAdded(GamePole.Score);
             if(isGoodEnd)
