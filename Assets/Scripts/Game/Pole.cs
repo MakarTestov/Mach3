@@ -145,12 +145,6 @@ namespace Assets.Scripts.Game
 
             timer.TimerOver += EndTime;
         }
-
-        private void EndTime(Timer timer)
-        {
-            endType = TypeEnd.TimeOver;
-            End_Game();
-        }
         #endregion
 
         #region My Methods
@@ -199,6 +193,18 @@ namespace Assets.Scripts.Game
                 }
             }
             Pointer.transform.position = boardblock[Random.Range(0, boardblock.GetLength(0)), Random.Range(0, boardblock.GetLength(1))].transform.position;
+        }
+        #endregion
+
+        #region EndTime(Timer timer)
+        /// <summary>
+        /// Событие при завершении времени
+        /// </summary>
+        /// <param name="timer"></param>
+        private void EndTime(Timer timer)
+        {
+            endType = TypeEnd.TimeOver;
+            End_Game();
         }
         #endregion
 
@@ -265,17 +271,22 @@ namespace Assets.Scripts.Game
         }
         #endregion
 
+        #region BallDelete(Ball ball)
+        /// <summary>
+        /// Событие при клике на шар
+        /// </summary>
+        /// <param name="ball"></param>
         private void BallDelete(Ball ball)
         {
             StartCoroutine(DeleteBall(ball));
         }
+        #endregion
 
-        #region DeleteBall(Ball ball, List<Ball> nb)
+        #region IEnumerator DeleteBall(Ball ball)
         /// <summary>
-        /// Событие при завершении клика
+        /// Корутин для удаления шаров при завершении клика
         /// </summary>
         /// <param name="ball"></param>
-        /// <param name="nb"></param>
         private IEnumerator DeleteBall(Ball ball)
         {
             timer.StopTimer();
@@ -319,12 +330,6 @@ namespace Assets.Scripts.Game
             yield return null;
         }
         #endregion
-
-        IEnumerator BallResize(bool up)
-        {
-
-            yield return null;
-        }
 
         #region CheckBallColor(int i, int j, List<Ball> nb)
         /// <summary>

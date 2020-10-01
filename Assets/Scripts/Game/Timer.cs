@@ -15,18 +15,15 @@ namespace Assets.Scripts.Game
     class Timer : MonoBehaviour
     {
         #region Parameters
-        #region sec
-        /// <summary>
-        /// Секунды
-        /// </summary>
-        private int sec = 0;
-        #endregion
 
-        #region milisec
+        private int sec;
+        private int mill;
+
+        #region nowmil
         /// <summary>
-        /// Миллисекунды
+        /// Оставшееся время
         /// </summary>
-        private float milisec = 0;
+        private float nowmil;
         #endregion
 
         #region LimitTimeMilliSec
@@ -36,11 +33,13 @@ namespace Assets.Scripts.Game
         public float LimitTimeMilliSec = 2.0f;
         #endregion
 
+        #region isTick
         /// <summary>
         /// Работает ли сейчас таймер
         /// </summary>
         [SerializeField]
         private bool isTick = false;
+        #endregion
 
         #region timer
         /// <summary>
@@ -62,39 +61,29 @@ namespace Assets.Scripts.Game
         private void Start()
         {
             timer = GetComponent<Text>();
+            SetTimeStart();
         }
 
         private void Update()
         {
             if (isTick)
             {
-                milisec += Time.deltaTime;
-                if (milisec >= 1)
-                {
-                    sec++;
-                    milisec -= 1;
-                }
                 string tmp = "";
-                if (sec < 10)
+                nowmil -= Time.deltaTime;
+                sec = (int)(nowmil);
+                mill = (int)((nowmil - sec) * 100);
+                if(sec < 10)
                 {
-                    tmp += "0" + sec.ToString();
+                    tmp += "0";
                 }
-                else
+                tmp += sec + ":";
+                if(mill < 10)
                 {
-                    tmp += sec.ToString();
+                    tmp += "0";
                 }
-                tmp += ":";
-                int m = ((int)(milisec * 100));
-                if (m < 10)
-                {
-                    tmp += "0" + m.ToString();
-                }
-                else
-                {
-                    tmp += m.ToString();
-                }
+                tmp += mill;
                 timer.text = tmp;
-                if(milisec + sec > LimitTimeMilliSec)
+                if(nowmil < 0)
                 {
                     StopTimer();
                     TimerOver?.Invoke(this);
@@ -104,14 +93,36 @@ namespace Assets.Scripts.Game
         #endregion
 
         #region My methods
+        #region SetTimeStart()
+        /// <summary>
+        /// Установить начальное значение таймера
+        /// </summary>
+        public void SetTimeStart()
+        {
+            nowmil = LimitTimeMilliSec;
+            sec = (int)LimitTimeMilliSec;
+            mill = (int)((LimitTimeMilliSec - sec) * 100);
+            timer.text = "";
+            if (sec < 10)
+            {
+                timer.text += "0";
+            }
+            timer.text += sec + ":";
+            if (mill < 10)
+            {
+                timer.text += "0";
+            }
+            timer.text += mill;
+        }
+        #endregion
+
         #region ClearTimer()
         /// <summary>
         /// Обнулить время
         /// </summary>
         public void ClearTimer()
         {
-            sec = 0;
-            milisec = 0;
+            nowmil = LimitTimeMilliSec;
         }
         #endregion
 

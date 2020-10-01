@@ -2290,7 +2290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16db865e8ab095646b37c1b0670a96c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LimitTimeMilliSec: 50.62
+  LimitTimeMilliSec: 2
   isTick: 0
 --- !u!1 &1880749617571111384
 GameObject:
@@ -2805,10 +2805,11 @@ MonoBehaviour:
   - {fileID: 6444804686359896264, guid: 7d3d26062673c614cb630e0866cb6dcc, type: 3}
   - {fileID: 8239257077145279553, guid: d246dff0758926647830e2946096a7d6, type: 3}
   - {fileID: 4429221438216782387, guid: 7adbae1a69e2e0b47a882a4fc3badd15, type: 3}
+  - {fileID: 7965690872803746374, guid: 8b41d69ba1f4fb945ac5b77f9499b4c6, type: 3}
   Pointer: {fileID: 1898197251}
   timer: {fileID: 1932947857}
   CountWH: {x: 10, y: 10}
-  CountSteps: 10
+  CountSteps: 2
   CountStepsText: {fileID: 1739582210}
   score: 0
   ScoreText: {fileID: 1470191470}

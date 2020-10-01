@@ -10,15 +10,35 @@ namespace Assets.Scripts.Game
 {
     class ResizeBall : MonoBehaviour
     {
+        #region Parameters
+        #region size
+        /// <summary>
+        /// Минимальный размер объекта
+        /// </summary>
         public float size = 0.5f;
+        #endregion
 
+        #region speed
+        /// <summary>
+        /// Скорость изменения
+        /// </summary>
         public float speed = 2.0f;
+        #endregion
+        #endregion
 
+        #region unity Methods
         private void Start()
         {
             StartCoroutine(Resize(true));
         }
+        #endregion
 
+        #region Resize 
+        /// <summary>
+        /// Корутин изменения объекта
+        /// </summary>
+        /// <param name="up"></param>
+        /// <returns></returns>
         public IEnumerator Resize(bool up)
         {
             float t = speed * Time.deltaTime;
@@ -42,5 +62,6 @@ namespace Assets.Scripts.Game
             }
             yield return null;
         }
+        #endregion
     }
 }
