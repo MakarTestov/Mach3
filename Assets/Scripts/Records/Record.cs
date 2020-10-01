@@ -23,7 +23,11 @@ namespace Assets.Scripts.Records
         /// <summary>
         /// Дата рекорда
         /// </summary>
-        public DateTime Date { get; set; }
+        private DateTime date;
+        /// <summary>
+        /// Дата рекорда
+        /// </summary>
+        public DateTime Date { get { return date; } }
         #endregion
 
         #region Points
@@ -35,6 +39,13 @@ namespace Assets.Scripts.Records
         #endregion
 
         #region My Methods
+
+        public void AddDate(DateTime date)
+        {
+            string d = date.ToString("d");
+            this.date = DateTime.Parse(d);
+        }
+
         #region string ToStringCSV()
         /// <summary>
         /// Получить текстовый формат класса в CSV
@@ -73,6 +84,39 @@ namespace Assets.Scripts.Records
             return 0;
         }
         #endregion
+
+        #region Operators
+        #region ==
+        public static bool operator ==(Record r1, Record r2)
+        {
+            if(r1.Name == r2.Name && r1.Points == r2.Points && r1.Date == r2.Date)
+            {
+                return true;
+            }
+            return false;
+        }
+        #endregion
+
+        #region !=
+        public static bool operator !=(Record r1, Record r2)
+        {
+            if(r1.Name != r2.Name || r1.Date != r2.Date || r1.Points != r2.Points)
+            {
+                return true;
+            }
+            return false;
+        }
+        #endregion
+        #endregion
+        
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
     }
 }

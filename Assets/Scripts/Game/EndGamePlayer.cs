@@ -15,28 +15,20 @@ namespace Assets.Scripts.Game
     class EndGamePlayer : MonoBehaviour
     {
         #region Parameters
+        #region GamePole
         /// <summary>
         /// Ссылка на генератор поля
         /// </summary>
         [SerializeField]
         private Pole GamePole;
+        #endregion
 
-        #region Link ends
         #region GoodEnd
         /// <summary>
-        /// Ссылка на объект хорошей концовки
+        /// Ссылка на объект концовки
         /// </summary>
         [SerializeField]
-        private GameObject GoodEnd;
-        #endregion
-
-        #region BadEnd
-        /// <summary>
-        /// Ссылка на объект плохой концовки
-        /// </summary>
-        [SerializeField]
-        private GameObject BadEnd;
-        #endregion
+        private GameObject End;
         #endregion
         #endregion
 
@@ -55,12 +47,7 @@ namespace Assets.Scripts.Game
             {
                 tablerecord.LoadRecord();
             }
-            SetRecord();
-        }
-
-        private void SetRecord()
-        {
-            
+            End.SetActive(true);
         }
         #endregion
     }

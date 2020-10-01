@@ -33,10 +33,28 @@ namespace Assets.Scripts.Game
         [SerializeField]
         private Text CountStepsText;
 
+        #region Score
+        /// <summary>
+        /// Текущий счет игры
+        /// </summary>
         [SerializeField]
-        private int Score = 0;
+        private int score = 0;
+        /// <summary>
+        /// Текущий счет игры
+        /// </summary>
+        public int Score
+        {
+            get { return score; }
+        }
+        #endregion
+
+        #region ScoreText
+        /// <summary>
+        /// Ссылка на текст счета очков
+        /// </summary>
         [SerializeField]
         private Text ScoreText;
+        #endregion
 
         /// <summary>
         /// Размер одного блока
@@ -122,8 +140,8 @@ namespace Assets.Scripts.Game
         /// <param name="plusScore">Количество шаров, которое нужно приплюсовать</param>
         private void ChangeScore(int plusScore)
         {
-            Score += plusScore;
-            ScoreText.text = "Score: " + Score;
+            score += plusScore;
+            ScoreText.text = "Score: " + score;
         }
         #endregion
 

@@ -43,10 +43,18 @@ namespace Assets.Scripts
         /// <returns></returns>
         public static string GetTextTableRecord(List<Record> records)
         {
+            Record r = Singleton<Record>.GetSingleton().TObject;
             string text = "";
             for (byte i = 0; i < records.Count; i++)
             {
-                text += records[i].ToString() + "\n";
+                if (r != records[i])
+                { 
+                    text += records[i].ToString() + "\n";
+                }
+                else
+                {
+                    text += "new " + records[i].ToString() + " new\n";
+                }
                 text += "-------------\n";
             }
             return text;

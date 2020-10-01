@@ -92,7 +92,8 @@ namespace Assets.Scripts.Records
                         string[] t = line.Split(';');
                         if (t != null)
                         {
-                            Record r = new Record { Name = t[0], Points = Convert.ToInt32(t[1]), Date = DateTime.Parse(t[2]) };
+                            Record r = new Record { Name = t[0], Points = Convert.ToInt32(t[1])};
+                            r.AddDate(DateTime.Parse(t[2]));
                             records.Add(r);
                         }
                     }
@@ -113,7 +114,7 @@ namespace Assets.Scripts.Records
         /// Добавить новый рекорд
         /// </summary>
         /// <param name="record"></param>
-        public bool AddRecord(Record record)
+        public void AddRecord(Record record)
         {
             records.Add(record);
             records.Sort(record);
@@ -122,16 +123,22 @@ namespace Assets.Scripts.Records
                 records.RemoveAt(CountRecords);
             }
             SaveFileRecordsCSV_Async(records, Path);//SaveFileRecordsCSV(records, Path);
-            if(records.Find(x => x == record) == null)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
         }
         #endregion
+
+        public bool CheckRecordAdded(int newpoints)
+        {
+            bool ispush = false;
+            foreach(var r in records)
+            {
+                if(newpoints > r.Points)
+                {
+                    ispush = true;
+                    break;
+                }
+            }
+            return ispush;
+        }
 
         #region List<Record> CreatedefaultRecords(byte count)
         /// <summary>
@@ -149,7 +156,8 @@ namespace Assets.Scripts.Records
 
             for(byte i = 1; i <= tr.Capacity; i++)
             {
-                Record r = new Record { Name = "Name " + i.ToString(), Points = tr.Capacity * 10 -  i * 10 + 10, Date = date };
+                Record r = new Record { Name = "Name " + i.ToString(), Points = tr.Capacity * 10 -  i * 10 + 10};
+                r.AddDate(date);
                 tr.Add(r);
             }
             return tr;
