@@ -37,8 +37,7 @@ namespace Assets.Scripts.Game
         /// <summary>
         /// Работает ли сейчас таймер
         /// </summary>
-        [SerializeField]
-        private bool isTick = false;
+        public static bool isTick = false;
         #endregion
 
         #region timer

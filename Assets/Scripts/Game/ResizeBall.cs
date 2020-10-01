@@ -18,6 +18,7 @@ namespace Assets.Scripts.Game
         public float size = 0.5f;
         #endregion
 
+        public static bool nonstop = true;
         #region speed
         /// <summary>
         /// Скорость изменения
@@ -44,7 +45,7 @@ namespace Assets.Scripts.Game
             float t = speed * Time.deltaTime;
             if (up)
             {
-                while(size < 1.0f)
+                while (size < 1.0f)
                 {
                     size += t;
                     transform.localScale = new Vector3(size, size, 1);

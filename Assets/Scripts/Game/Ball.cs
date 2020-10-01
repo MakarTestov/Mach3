@@ -43,7 +43,7 @@ namespace Assets.Scripts.Game
         /// </summary>
         public void Click()
         {
-                EndClick?.Invoke(this);
+             EndClick?.Invoke(this);
         }
         #endregion
     }

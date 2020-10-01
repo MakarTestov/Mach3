@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.Effects;
+using Assets.Scripts.Game;
 using Assets.Scripts.Loading;
 using Assets.Scripts.Tags;
 using System;
@@ -34,6 +35,7 @@ namespace Assets.Scripts.MenuControllers
         /// <param name="show"></param>
         public void ShowHide(GameObject show)
         {
+            Timer.isTick = !Timer.isTick;
             ShowHideObject.ShowHide(show);
         }
         #endregion
