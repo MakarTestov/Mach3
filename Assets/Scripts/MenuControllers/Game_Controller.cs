@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Loading;
+﻿using Assets.Scripts.Effects;
+using Assets.Scripts.Loading;
 using Assets.Scripts.Tags;
 using System;
 using System.Collections.Generic;
@@ -23,6 +24,17 @@ namespace Assets.Scripts.MenuControllers
         public void Back_Click()
         {
             Loading_Controller.LoadScene(AllNameScene.GetName_MineMenu());
+        }
+        #endregion
+
+        #region ShowHide(GameObject show)
+        /// <summary>
+        /// Показать скрыть панель
+        /// </summary>
+        /// <param name="show"></param>
+        public void ShowHide(GameObject show)
+        {
+            ShowHideObject.ShowHide(show);
         }
         #endregion
         #endregion

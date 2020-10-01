@@ -11,6 +11,7 @@ namespace Assets.Scripts.Game
     [RequireComponent(typeof(Button))]
     class Ball : MonoBehaviour
     {
+        #region Parameters
         public int ID;
         public int i;
         public int j;
@@ -18,42 +19,31 @@ namespace Assets.Scripts.Game
         public static GameObject select;
         public static GameObject moveTo;
 
-        public List<Ball> linkNeighbouгs;
+        public static int IDColor;
+        #endregion
 
-        public static Color ClickColor;
-        public Color myColor;
+        #region EndClick
+        public delegate void EventClick(Ball ball);
+        /// <summary>
+        /// Событие вызываемое при завершении обработки клика
+        /// </summary>
+        public event EventClick EndClick;
+        #endregion
 
+        #region Unity Methods
         private void Start()
         {
             GetComponent<Button>().onClick.AddListener(Click);
-            myColor = GetComponent<Image>().color;
         }
+        #endregion
 
+        #region Click()
+        /// <summary>
+        /// Событие при клике на мяч
+        /// </summary>
         public void Click()
         {
-            ClickColor = myColor;
-            List<Ball> nb = new List<Ball>();
-            nb.Add(this);
-            SetNeighbourColor(nb);
-        }
-
-        #region List<Ball> SetNeighbourColor(List<Ball> nb)
-        /// <summary>
-        /// Установить список соседей того же цвета
-        /// </summary>
-        /// <param name="nb"></param>
-        /// <returns></returns>
-        public List<Ball> SetNeighbourColor(List<Ball> nb)
-        {
-            foreach(var r in linkNeighbouгs)
-            {
-                if(r.myColor == ClickColor && nb.Find(x => x == r) == null)
-                {
-                    nb.Add(r);
-                    r.SetNeighbourColor(nb);
-                }
-            }
-            return nb;
+                EndClick?.Invoke(this);
         }
         #endregion
     }

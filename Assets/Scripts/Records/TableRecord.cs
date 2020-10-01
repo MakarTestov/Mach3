@@ -42,6 +42,20 @@ namespace Assets.Scripts.Records
         /// </summary>
         private byte CountRecords = 10;
         #endregion
+
+        #region isTableLoad
+        /// <summary>
+        /// Параметр отвечающий за информацию о загрузке таблицы
+        /// </summary>
+        private bool isTableLoad = false;
+        /// <summary>
+        /// Параметр отвечающий за информацию о загрузке таблицы
+        /// </summary>
+        public bool IsTableLoad
+        {
+            get { return isTableLoad; }
+        }
+        #endregion
         #endregion
 
         #region Constructors
@@ -89,6 +103,8 @@ namespace Assets.Scripts.Records
                 records = CreatedefaultRecords(CountRecords);
                 SaveFileRecordsCSV_Async(records, Path);
             }
+
+            isTableLoad = true;
         }
         #endregion
 
@@ -97,7 +113,7 @@ namespace Assets.Scripts.Records
         /// Добавить новый рекорд
         /// </summary>
         /// <param name="record"></param>
-        public void AddRecord(Record record)
+        public bool AddRecord(Record record)
         {
             records.Add(record);
             records.Sort(record);
@@ -106,6 +122,14 @@ namespace Assets.Scripts.Records
                 records.RemoveAt(CountRecords);
             }
             SaveFileRecordsCSV_Async(records, Path);//SaveFileRecordsCSV(records, Path);
+            if(records.Find(x => x == record) == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         #endregion
 
